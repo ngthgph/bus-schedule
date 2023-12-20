@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [BusSchedule::class], version = 1, exportSchema = false)
 abstract class BusDatabase: RoomDatabase() {
-    abstract fun scheduleDao(): BusDao
+    abstract fun busDao(): BusDao
 
     companion object {
         @Volatile
