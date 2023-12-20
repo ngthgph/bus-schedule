@@ -6,16 +6,16 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [BusSchedule::class], version = 1, exportSchema = false)
-abstract class ScheduleDatabase: RoomDatabase() {
-    abstract fun scheduleDao(): ScheduleDao
+abstract class BusDatabase: RoomDatabase() {
+    abstract fun scheduleDao(): BusDao
 
     companion object {
         @Volatile
-        private var Instance: ScheduleDatabase? = null
+        private var Instance: BusDatabase? = null
 
-        fun getDatabase(context: Context): ScheduleDatabase {
+        fun getDatabase(context: Context): BusDatabase {
             return Instance?:synchronized(this) {
-                Room.databaseBuilder(context, ScheduleDatabase::class.java, "schedule_database")
+                Room.databaseBuilder(context, BusDatabase::class.java, "schedule_database")
                     .createFromAsset("database/bus_schedule.db")
                     .build()
                     .also { Instance = it }
