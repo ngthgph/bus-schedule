@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [BusSchedule::class], version = 1, exportSchema = false)
+@Database(entities = arrayOf(BusSchedule::class), version = 2)
 abstract class BusDatabase: RoomDatabase() {
     abstract fun busDao(): BusDao
 
@@ -15,8 +15,9 @@ abstract class BusDatabase: RoomDatabase() {
 
         fun getDatabase(context: Context): BusDatabase {
             return Instance?:synchronized(this) {
-                Room.databaseBuilder(context, BusDatabase::class.java, "schedule_database")
+                Room.databaseBuilder(context, BusDatabase::class.java, "bus_database")
                     .createFromAsset("database/bus_schedule.db")
+                    .fallbackToDestructiveMigration()
                     .build()
                     .also { Instance = it }
             }
